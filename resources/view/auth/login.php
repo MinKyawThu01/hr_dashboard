@@ -1,6 +1,7 @@
 <?php 
-    require_once ('app/classes/Authentication.php');
-    $auth = new Authentication();
+    // require_once ('app/classes/Authentication.php');
+    // $auth = new Authentication();
+    // $auth->login();
 ?>
 
 <!doctype html>
@@ -52,7 +53,7 @@
                     <div class="col-lg-6 d-flex justify-content-center align-items-center border-0 rounded-lg auth-h100">
                         <div class="w-100 p-3 p-md-5 card border-0 bg-dark text-light" style="max-width: 32rem;">
                             <!-- Form -->
-                            <form class="row g-1 p-3 p-md-4">
+                            <form class="row g-1 p-3 p-md-4" method="POST" action="/login/submit">
                                 <div class="col-12 text-center mb-1 mb-lg-5">
                                     <h1>Sign in</h1>
                                     <span>Free access to our dashboard.</span>
@@ -69,7 +70,7 @@
                                 <div class="col-12">
                                     <div class="mb-2">
                                         <label class="form-label">Email address</label>
-                                        <input type="email" class="form-control form-control-lg" placeholder="name@example.com">
+                                        <input type="text" name="email" class="form-control form-control-lg" placeholder="name@example.com">
                                     </div>
                                 </div>
                                 <div class="col-12">
@@ -80,7 +81,7 @@
                                                 <a class="text-secondary" href="password_reset">Forgot Password?</a>
                                             </span>
                                         </div>
-                                        <input type="password" class="form-control form-control-lg" placeholder="***************">
+                                        <input type="password" name="password" class="form-control form-control-lg" placeholder="***************">
                                     </div>
                                 </div>
                                 <div class="col-12">
@@ -92,7 +93,7 @@
                                     </div>
                                 </div>
                                 <div class="col-12 text-center mt-4">
-                                    <a href="index" class="btn btn-lg btn-block btn-light lift text-uppercase" atl="signin">SIGN IN</a>
+                                    <button type="submit" name="sign_in" class="btn btn-lg btn-block btn-light lift text-uppercase" atl="signin">SIGN IN</button>
                                 </div>
                                 <div class="col-12 text-center mt-4">
                                     <span class="text-muted">Don't have an account yet? <a href="register" class="text-secondary">Sign up here</a></span>

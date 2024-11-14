@@ -26,6 +26,16 @@ route('GET', '/login', function() {
     require_once(VIEW_PATH . 'auth/login.php');
 });
 
+route('POST', '/login/submit', function() {
+    require_once('app/classes/Authentication.php');
+    $auth = new Authentication();
+    if ($_SERVER['REQUEST_METHOD'] === "POST") {
+        if (isset($_POST['sign_in'])) {
+            $auth->login($_POST);
+        }
+    }
+});
+
 route('GET', '/register', function() {
     require_once(VIEW_PATH . 'auth/register.php');
 });
