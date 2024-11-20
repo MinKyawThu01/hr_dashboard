@@ -1,7 +1,7 @@
 <?php 
-    // require_once ('app/classes/Authentication.php');
-    // $auth = new Authentication();
-    // $auth->login();
+    if (isset($_SESSION['authenticated_user'])) {
+        echo "<script> location.href = '/' </script>";
+    }
 ?>
 
 <!doctype html>
@@ -86,7 +86,7 @@
                                 </div>
                                 <div class="col-12">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" name="remember_me">
                                         <label class="form-check-label" for="flexCheckDefault">
                                             Remember me
                                         </label>

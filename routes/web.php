@@ -22,11 +22,23 @@ function dispatch($url, $method) {
 }
 
 
+route('GET', '/', function() {
+    session_start();
+    require_once(VIEW_PATH . 'index.php');
+});
+
 route('GET', '/login', function() {
+    session_start();
+    require_once('app/classes/Authentication.php');
+    if (isset($_COOKIE['remember_token'])) {
+        $auth = new Authentication();
+        $auth->checkRemember();
+    }
     require_once(VIEW_PATH . 'auth/login.php');
 });
 
 route('POST', '/login/submit', function() {
+    session_start();
     require_once('app/classes/Authentication.php');
     $auth = new Authentication();
     if ($_SERVER['REQUEST_METHOD'] === "POST") {
