@@ -1,4 +1,5 @@
 # hr_dashboard
+> composer require phpmailer/phpmailer
 
 How to run?
 
