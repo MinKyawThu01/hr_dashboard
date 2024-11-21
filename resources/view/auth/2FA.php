@@ -1,3 +1,11 @@
+<?php
+
+    if (isset($_SESSION['authenticated_user'])) {
+        echo "<script> location.href = '/' </script>";
+    }
+
+?>
+
 <!doctype html>
 <html class="no-js" lang="en" dir="ltr">
 
@@ -48,7 +56,7 @@
                     <div class="col-lg-6 d-flex justify-content-center align-items-center border-0 rounded-lg auth-h100">
                         <div class="w-100 p-3 p-md-5 card border-0 bg-dark text-light" style="max-width: 32rem;">
                             <!-- Form -->
-                            <form class="row g-1 p-3 p-md-4">
+                            <form class="row g-1 p-3 p-md-4" action="/2FA/verify" method="POST">
                                 <div class="col-12 text-center mb-1 mb-lg-5">
                                     <img src="../../../public/assets/images/verify.svg" class="w240 mb-4" alt="" />
                                     <h1>Verification</h1>
@@ -56,26 +64,29 @@
                                 </div>
                                 <div class="col">
                                     <div class="mb-2">
-                                        <input type="email" class="form-control form-control-lg text-center" placeholder="-">
+                                        <input type="text" maxlength="1" class="form-control form-control-lg text-center" placeholder="-">
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="mb-2">
-                                        <input type="email" class="form-control form-control-lg text-center" placeholder="-">
+                                        <input type="text" maxlength="1" class="form-control form-control-lg text-center" placeholder="-">
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="mb-2">
-                                        <input type="email" class="form-control form-control-lg text-center" placeholder="-">
+                                        <input type="text" maxlength="1" class="form-control form-control-lg text-center" placeholder="-">
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="mb-2">
-                                        <input type="email" class="form-control form-control-lg text-center" placeholder="-">
+                                        <input type="text" maxlength="1" class="form-control form-control-lg text-center" placeholder="-">
                                     </div>
                                 </div>
+                                <!-- <div>
+                                    <input type="text" name="otp">
+                                </div> -->
                                 <div class="col-12 text-center mt-4">
-                                    <a href="index" title="" class="btn btn-lg btn-block btn-light lift text-uppercase">Verify my account</a>
+                                    <button type="submit" name="verify" class="btn btn-lg btn-block btn-light lift text-uppercase">Verify my account</button>
                                 </div>
                                 <div class="col-12 text-center mt-4">
                                     <span class="text-muted">Haven't received it? <a href="#" class="text-secondary">Resend a new code.</a></span>

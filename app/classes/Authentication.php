@@ -1,4 +1,5 @@
 <?php
+// require_once('../mail/OTP.php');
 
 class Authentication extends DB
 {
@@ -28,7 +29,15 @@ class Authentication extends DB
                             $stmt->bindParam('email', $post['email'], PDO::PARAM_STR);
                             $stmt->execute();
                         }
-                        $_SESSION['authenticated_user'] = $user_data['id'];
+                        $_SESSION['temp_user'] = [
+                            'id' => $user_data['id'], 
+                            'email' => $user_data['email'], 
+                            'employee_code' => $user_data['employee_code']
+                        ];
+                        $this->generateCode();
+                        // array_merge($_SESSION['temp_user'], ['code' => $this->generateCode()]);
+                        $this->sendMail($_SESSION['temp_user']);
+                        // echo "<script> location.href = '/2FA' </script>";
                         return true;
                     } else {
                         echo 'invalid pwd!';
@@ -50,9 +59,50 @@ class Authentication extends DB
             var_dump('token has');
             $stmt->execute();
             $user_data = $stmt->fetch(PDO::FETCH_ASSOC);
-            $_SESSION['authenticated_user'] = $user_data['id'];
+            $_SESSION['temp_user'] = [$user_data['id'], $user_data['email'], $user_data['employee_code']];
             return true;
         } catch (Exception $e) {
+            echo "Error: " . $e->getMessage();
+        }
+    }
+
+    private function generateCode($length = 4) {
+        try {
+
+            $otp = '';
+            for ($i = 0; $i < $length; $i++) {
+                $otp .= mt_rand(0, 9);  // mt_rand() generates a random number from 0 to 9
+            }
+            $_SESSION['otp'] = $otp;
+            return true;
+
+        } catch (Exception $e) {
+            echo "Error: " . $e->getMessage();
+        }
+    }
+
+    public function sendMail($user_data) {
+        try {
+            require_once('app/mail/OTP.php');
+            $mail = new OTP();
+            $mail->sendOTP($user_data);
+        } catch (Exception $e) {
+            echo "Error: " . $e->getMessage();
+        }
+    }
+
+    public function verifyOTP($post) {
+        try {
+            // $this->generateCode();
+            $otp = $_SESSION['otp'];
+            if (isset($otp) && $post['otp']) {
+                if ($otp == $post['otp']) {
+                    echo 'match';
+                } else {
+                    echo 'not match';
+                }
+            }
+        }  catch (Exception $e) {
             echo "Error: " . $e->getMessage();
         }
     }

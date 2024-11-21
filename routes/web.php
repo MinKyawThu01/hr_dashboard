@@ -53,7 +53,21 @@ route('GET', '/register', function() {
 });
 
 route('GET', '/2FA', function() {
+    session_start();
     require_once(VIEW_PATH . 'auth/2FA.php');
+});
+
+route('POST', '/2FA/verify', function() {
+    session_start();
+    require_once('app/classes/Authentication.php');
+    $auth = new Authentication();
+    // var_dump($_POST);
+    // die();
+    if ($_SERVER['REQUEST_METHOD'] === "POST") {
+        if (isset($_POST['verify'])) {
+            $auth->verifyOTP($_POST);
+        }
+    }
 });
 
 route('GET', '/passwor-reset', function() {
