@@ -50,6 +50,10 @@ route('POST', '/login/submit', function() {
 
 route('GET', '/register', function() {
     require_once(VIEW_PATH . 'auth/register.php');
+    $auth = new Authentication();
+    if($_SERVER['REQUEST_METHOD'] === "POST"){
+        $auth->register($_POST);
+    }
 });
 
 route('GET', '/2FA', function() {
@@ -65,7 +69,10 @@ route('POST', '/2FA/verify', function() {
     // die();
     if ($_SERVER['REQUEST_METHOD'] === "POST") {
         if (isset($_POST['verify'])) {
-            $auth->verifyOTP($_POST);
+           $varify = $auth->verifyOTP($_POST);
+           if($varify) {
+                echo "<script> location.href = '/' </script>";
+           }
         }
     }
 });

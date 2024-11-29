@@ -64,27 +64,27 @@
                                 </div>
                                 <div class="col">
                                     <div class="mb-2">
-                                        <input type="text" maxlength="1" class="form-control form-control-lg text-center" placeholder="-">
+                                        <input type="text" maxlength="1" class="form-control form-control-lg text-center" id="otp1" placeholder="-" oninput="moveToNext(this, 'otp2')">
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="mb-2">
-                                        <input type="text" maxlength="1" class="form-control form-control-lg text-center" placeholder="-">
+                                        <input type="text" maxlength="1" class="form-control form-control-lg text-center" id="otp2" placeholder="-" oninput="moveToNext(this, 'otp3')">
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="mb-2">
-                                        <input type="text" maxlength="1" class="form-control form-control-lg text-center" placeholder="-">
+                                        <input type="text" maxlength="1" class="form-control form-control-lg text-center" id="otp3" placeholder="-" oninput="moveToNext(this, 'otp4')">
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="mb-2">
-                                        <input type="text" maxlength="1" class="form-control form-control-lg text-center" placeholder="-">
+                                        <input type="text" maxlength="1" class="form-control form-control-lg text-center" id="otp4" placeholder="-" oninput="combineOTP()">
                                     </div>
                                 </div>
-                                <!-- <div>
-                                    <input type="text" name="otp">
-                                </div> -->
+                                <div>
+                                    <input type="hidden" name="otp" id="result">
+                                </div>
                                 <div class="col-12 text-center mt-4">
                                     <button type="submit" name="verify" class="btn btn-lg btn-block btn-light lift text-uppercase">Verify my account</button>
                                 </div>
@@ -107,6 +107,7 @@
 
 <!-- Jquery Core Js -->
 <script src="../../../public/assets/bundles/libscripts.bundle.js"></script>
+<script src="../../../public/assets/js/page/auth.js"></script>
 
 </body>
 

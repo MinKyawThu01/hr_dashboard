@@ -10,6 +10,16 @@ class Authentication extends DB
         $this->con = $this->connect();
     }
 
+    public function register($post) {
+        try {
+            $selectSql = "SELECT * FROM `employees` WHERE `email`=:email AND `deleted_at` IS NULL";
+            $stmt = $this->con->prepare($selectSql);
+            $stmt->bindParam(':email', $post['email'], PDO::PARAM_STR);
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+    }
+
     public function login($post) {
         try {
             $selectSql = "SELECT * FROM `employees` WHERE `email`=:email AND `deleted_at` IS NULL";
@@ -97,7 +107,8 @@ class Authentication extends DB
             $otp = $_SESSION['otp'];
             if (isset($otp) && $post['otp']) {
                 if ($otp == $post['otp']) {
-                    echo 'match';
+                    $_SESSION['authenticated_user'] = 'varified';
+                    return true;
                 } else {
                     echo 'not match';
                 }
